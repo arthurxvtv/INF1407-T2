@@ -24,4 +24,5 @@ urlpatterns = [
     # incluir a seguinte linha
     path("login/", Autenticar.as_view(), name="login"),
     path("reviews/", Reviews.as_view({"get": "list", "post": "create"}), name="reviews"),
+    path("reviews/<int:pk>/", Reviews.as_view({"get": "retrieve", "patch": "partial_update", "delete": "destroy"}), name="reviews"),
 ]
