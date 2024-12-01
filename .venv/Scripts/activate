@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="c:\Users\arthu\Documents\GitHub\INF1407-T1\.venv"
+VIRTUAL_ENV="c:\Users\arthu\Documents\GitHub\INF1407-T2\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

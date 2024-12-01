@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.authtoken.models import Token
+from rest_framework.viewsets import ModelViewSet
+
 from .models import Review
 from .serializer import ReviewSerializer
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
 
 
 class Autenticar(APIView):
@@ -13,8 +14,11 @@ class Autenticar(APIView):
     permission_classes = []
 
     def post(self, request, format=None):
-        username = request.POST.get("username")
-        password = request.POST.get("password")
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        print(username)
+        print(password)
 
         user = User.objects.filter(username=username)
 
@@ -25,6 +29,7 @@ class Autenticar(APIView):
 
         return Response({"token": token.key})
 
+
 class Reviews(ModelViewSet):
     "Cria um endpoint para Reviews e filtra para pegar as Reviews apenas do usuário selecionado."
     serializer_class = ReviewSerializer
@@ -34,3 +39,4 @@ class Reviews(ModelViewSet):
 
     def get_queryset(self):
         return Review.objects.filter(user=self.request.user)
+
