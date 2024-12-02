@@ -44,5 +44,18 @@ var ReviewsController = /** @class */ (function () {
             window.location.replace("login.html");
         });
     };
+    ReviewsController.prototype.createReview = function (game_name, stars) {
+        return fetch(url + "/reviews/", {
+            headers: {
+                Authorization: "Token " + this.token() || "",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                game_name: game_name,
+                stars: stars,
+            }),
+        }).then(function (request) { return request.json(); });
+    };
     return ReviewsController;
 }());

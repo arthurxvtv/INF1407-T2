@@ -51,4 +51,18 @@ class ReviewsController {
       window.location.replace("login.html");
     });
   }
+
+  createReview(game_name: string, stars: number): Promise<Review> {
+    return fetch(url + "/reviews/", {
+      headers: {
+        Authorization: "Token " + this.token() || "",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        game_name,
+        stars,
+      }),
+    }).then((request) => request.json());
+  }
 }
