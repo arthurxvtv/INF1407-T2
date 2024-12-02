@@ -57,5 +57,17 @@ var ReviewsController = /** @class */ (function () {
             }),
         }).then(function (request) { return request.json(); });
     };
+    ReviewsController.prototype.deleteReview = function (id) {
+        return fetch(url + "/reviews/".concat(id, "/"), {
+            headers: {
+                Authorization: "Token " + this.token() || "",
+            },
+            method: "DELETE",
+        }).then(function (request) {
+            if (!request.ok) {
+                throw new Error("Erro ao deletar a review");
+            }
+        });
+    };
     return ReviewsController;
 }());

@@ -1,4 +1,5 @@
 interface Review {
+  id: number;
   game_name: string;
   stars: number;
 }
@@ -64,5 +65,18 @@ class ReviewsController {
         stars,
       }),
     }).then((request) => request.json());
+  }
+
+  deleteReview(id: number): Promise<void> {
+    return fetch(url + `/reviews/${id}/`, {
+      headers: {
+        Authorization: "Token " + this.token() || "",
+      },
+      method: "DELETE",
+    }).then((request) => {
+      if (!request.ok) {
+        throw new Error("Erro ao deletar a review");
+      }
+    });
   }
 }

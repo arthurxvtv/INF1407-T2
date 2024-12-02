@@ -6,7 +6,15 @@ window.onload = function () {
     controller.listaReviews().then(function (reviews) {
         reviews.map(function (review) {
             var el = document.createElement("li");
-            el.innerHTML = "".concat(review.game_name, " - ").concat(review.stars, " estrelas.");
+            el.innerHTML = "".concat(review.game_name, " - ").concat(review.stars, " \u2605");
+            var deleteButton = document.createElement("button");
+            deleteButton.innerHTML = "Deletar";
+            deleteButton.addEventListener("click", function () {
+                controller.deleteReview(review.id).then(function () {
+                    el.remove();
+                });
+            });
+            el.appendChild(deleteButton);
             listaReviews === null || listaReviews === void 0 ? void 0 : listaReviews.appendChild(el);
         });
     });
