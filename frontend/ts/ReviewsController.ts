@@ -79,4 +79,26 @@ class ReviewsController {
       }
     });
   }
+
+  getReview(id: number): Promise<Review> {
+    return fetch(url + `/reviews/${id}/`, {
+      headers: {
+        Authorization: "Token " + this.token() || "",
+      },
+    }).then((request) => request.json());
+  }
+
+  updateReview(id: number, game_name: string, stars: number): Promise<Review> {
+    return fetch(url + `/reviews/${id}/`, {
+      headers: {
+        Authorization: "Token " + this.token() || "",
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+      body: JSON.stringify({
+        game_name,
+        stars,
+      }),
+    }).then((request) => request.json());
+  }
 }

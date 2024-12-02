@@ -14,7 +14,13 @@ window.onload = function () {
                     el.remove();
                 });
             });
+            var editButton = document.createElement("button");
+            editButton.innerHTML = "Editar";
+            editButton.addEventListener("click", function () {
+                window.location.replace("editReview.html?id=".concat(review.id));
+            });
             el.appendChild(deleteButton);
+            el.appendChild(editButton);
             listaReviews === null || listaReviews === void 0 ? void 0 : listaReviews.appendChild(el);
         });
     });

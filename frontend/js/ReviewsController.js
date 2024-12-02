@@ -69,5 +69,25 @@ var ReviewsController = /** @class */ (function () {
             }
         });
     };
+    ReviewsController.prototype.getReview = function (id) {
+        return fetch(url + "/reviews/".concat(id, "/"), {
+            headers: {
+                Authorization: "Token " + this.token() || "",
+            },
+        }).then(function (request) { return request.json(); });
+    };
+    ReviewsController.prototype.updateReview = function (id, game_name, stars) {
+        return fetch(url + "/reviews/".concat(id, "/"), {
+            headers: {
+                Authorization: "Token " + this.token() || "",
+                "Content-Type": "application/json",
+            },
+            method: "PATCH",
+            body: JSON.stringify({
+                game_name: game_name,
+                stars: stars,
+            }),
+        }).then(function (request) { return request.json(); });
+    };
     return ReviewsController;
 }());
