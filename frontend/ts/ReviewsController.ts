@@ -39,4 +39,16 @@ class ReviewsController {
         );
       });
   }
+
+  logout(): void {
+    fetch(url + "/logout/", {
+      headers: {
+        Authorization: "Token " + this.token() || "",
+      },
+      method: "POST",
+    }).then(() => {
+      localStorage.removeItem("token");
+      window.location.replace("login.html");
+    });
+  }
 }

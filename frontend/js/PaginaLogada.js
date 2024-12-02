@@ -1,3 +1,4 @@
+"use strict";
 var token = localStorage.getItem("token");
 if (!token) {
     var split = window.location.href.split("/");

@@ -40,3 +40,9 @@ class Reviews(ModelViewSet):
     def get_queryset(self):
         return Review.objects.filter(user=self.request.user)
 
+class Logout(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response({"mensagem": "Logout realizado com sucesso"})

@@ -1,3 +1,4 @@
+"use strict";
 var url = "http://localhost:8000";
 var ReviewsController = /** @class */ (function () {
     function ReviewsController() {
@@ -30,6 +31,17 @@ var ReviewsController = /** @class */ (function () {
                 return;
             localStorage.setItem("token", token.token);
             window.location.replace(window.location.href.replace("/login.html", "/index.html"));
+        });
+    };
+    ReviewsController.prototype.logout = function () {
+        fetch(url + "/logout/", {
+            headers: {
+                Authorization: "Token " + this.token() || "",
+            },
+            method: "POST",
+        }).then(function () {
+            localStorage.removeItem("token");
+            window.location.replace("login.html");
         });
     };
     return ReviewsController;

@@ -1,5 +1,6 @@
 window.onload = function () {
   const listaReviews = document.getElementById("lista-reviews");
+  const logoutButton = document.getElementById("logout-button");
 
   const controller = new ReviewsController();
 
@@ -9,5 +10,9 @@ window.onload = function () {
       el.innerHTML = `${review.game_name} - ${review.stars} estrelas.`;
       listaReviews?.appendChild(el);
     });
+  });
+
+  logoutButton?.addEventListener("click", function () {
+    controller.logout();
   });
 };
