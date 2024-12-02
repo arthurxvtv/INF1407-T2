@@ -4,10 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-
 from .models import Review
 from .serializer import ReviewSerializer
-
 
 class Autenticar(APIView):
     authentication_classes = []
@@ -16,9 +14,6 @@ class Autenticar(APIView):
     def post(self, request, format=None):
         username = request.data.get("username")
         password = request.data.get("password")
-
-        print(username)
-        print(password)
 
         user = User.objects.filter(username=username)
 
@@ -29,12 +24,24 @@ class Autenticar(APIView):
 
         return Response({"token": token.key})
 
+class Registrar(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def post(self, request, format=None):
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        if User.objects.filter(username=username).exists():
+            return Response({"mensagem": "Usuário já existe"}, 400)
+
+        user = User.objects.create_user(username=username, password=password)
+        token = Token.objects.create(user=user)
+
+        return Response({"token": token.key})
 
 class Reviews(ModelViewSet):
-    "Cria um endpoint para Reviews e filtra para pegar as Reviews apenas do usuário selecionado."
     serializer_class = ReviewSerializer
-
-    # Chama o endpoint apenas para usuários logados
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

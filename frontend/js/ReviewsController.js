@@ -89,5 +89,21 @@ var ReviewsController = /** @class */ (function () {
             }),
         }).then(function (request) { return request.json(); });
     };
+    ReviewsController.prototype.register = function (username, password) {
+        return fetch(url + "/register/", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        }).then(function (request) {
+            if (!request.ok) {
+                throw new Error("Erro ao registrar o usuário");
+            }
+        });
+    };
     return ReviewsController;
 }());

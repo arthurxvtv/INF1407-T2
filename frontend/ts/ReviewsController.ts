@@ -101,4 +101,21 @@ class ReviewsController {
       }),
     }).then((request) => request.json());
   }
+
+  register(username: string, password: string): Promise<void> {
+    return fetch(url + "/register/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    }).then((request) => {
+      if (!request.ok) {
+        throw new Error("Erro ao registrar o usuário");
+      }
+    });
+  }
 }
