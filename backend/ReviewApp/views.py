@@ -40,6 +40,21 @@ class Registrar(APIView):
 
         return Response({"token": token.key})
 
+class AlterarSenha(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, format=None):
+        user = request.user
+        nova_senha = request.data.get("nova_senha")
+
+        if not nova_senha:
+            return Response({"mensagem": "Nova senha não fornecida"}, 400)
+
+        user.set_password(nova_senha)
+        user.save()
+
+        return Response({"mensagem": "Senha alterada com sucesso"})
+
 class Reviews(ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [IsAuthenticated]

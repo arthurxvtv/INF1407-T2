@@ -17,13 +17,14 @@ Including another URLconf
 from django.contrib import admin
 
 from django.urls import path
-from ReviewApp.views import Autenticar, Reviews, Logout, Registrar
+from ReviewApp.views import Autenticar, Reviews, Logout, Registrar, AlterarSenha
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", Autenticar.as_view(), name="login"),
     path("logout/", Logout.as_view(), name="logout"),
     path("register/", Registrar.as_view(), name="register"),
+    path("alterar-senha/", AlterarSenha.as_view(), name="alterar-senha"),
     path("reviews/", Reviews.as_view({"get": "list", "post": "create"}), name="reviews"),
     path("reviews/<int:pk>/", Reviews.as_view({"get": "retrieve", "patch": "partial_update", "delete": "destroy"}), name="reviews"),
 ]

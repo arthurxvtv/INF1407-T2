@@ -118,4 +118,21 @@ class ReviewsController {
       }
     });
   }
+
+  updatePassword(nova_senha: string): Promise<void> {
+    return fetch(url + "/alterar-senha/", {
+      headers: {
+        Authorization: "Token " + this.token() || "",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        nova_senha,
+      }),
+    }).then((request) => {
+      if (!request.ok) {
+        throw new Error("Erro ao alterar a senha");
+      }
+    });
+  }
 }

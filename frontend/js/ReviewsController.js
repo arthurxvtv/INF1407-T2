@@ -105,5 +105,21 @@ var ReviewsController = /** @class */ (function () {
             }
         });
     };
+    ReviewsController.prototype.updatePassword = function (nova_senha) {
+        return fetch(url + "/alterar-senha/", {
+            headers: {
+                Authorization: "Token " + this.token() || "",
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                nova_senha: nova_senha,
+            }),
+        }).then(function (request) {
+            if (!request.ok) {
+                throw new Error("Erro ao alterar a senha");
+            }
+        });
+    };
     return ReviewsController;
 }());

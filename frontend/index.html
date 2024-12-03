@@ -6,6 +6,7 @@
     <ul id="lista-reviews"></ul>
     <button id="logout-button">Logout</button>
     <button id="create-review-page-button">Criar Review</button>
+    <button id="change-password-page-button">Alterar Senha</button>
   </body>
   <script src="js/PaginaLogada.js"></script>
   <script src="js/ReviewsController.js"></script>
@@ -13,6 +14,10 @@
   <script>
     document.getElementById("create-review-page-button").addEventListener("click", function () {
       window.location.replace("createReview.html");
+    });
+
+    document.getElementById("change-password-page-button").addEventListener("click", function () {
+      window.location.replace("alterarSenha.html");
     });
   </script>
 </html>
